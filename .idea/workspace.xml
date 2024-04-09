@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c6187d-4b7e-4f7b-98e3-d9f75c349d8a" name="Changes" comment="git ignore changes regarding changing IDE to PyCharm" />
+    <list default="true" id="13c6187d-4b7e-4f7b-98e3-d9f75c349d8a" name="Changes" comment="invoice proj starts with modules for creating xlsx report time, getting amount in words, counting salary">
+      <change beforePath="$PROJECT_DIR$/invoicer/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/invoicer/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,11 +87,20 @@
       <option name="project" value="LOCAL" />
       <updated>1712688967342</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="invoice proj starts with modules for creating xlsx report time, getting amount in words, counting salary">
+      <option name="closed" value="true" />
+      <created>1712689693216</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712689693216</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="git ignore changes regarding changing IDE to PyCharm" />
-    <option name="LAST_COMMIT_MESSAGE" value="git ignore changes regarding changing IDE to PyCharm" />
+    <MESSAGE value="invoice proj starts with modules for creating xlsx report time, getting amount in words, counting salary" />
+    <option name="LAST_COMMIT_MESSAGE" value="invoice proj starts with modules for creating xlsx report time, getting amount in words, counting salary" />
   </component>
 </project>
