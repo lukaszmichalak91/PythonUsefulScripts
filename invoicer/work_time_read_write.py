@@ -1,10 +1,13 @@
 from datetime import date, datetime, timedelta
+
 from openpyxl import Workbook, load_workbook
+from openpyxl.styles import PatternFill
+from openpyxl.utils import get_column_letter
 
 
 def copy_time_report_txt_to_list(source_path):
-    work_time_file = open(source_path, 'r')
-    return work_time_file.readlines()
+    with open(source_path, 'r') as work_time_file:
+        return work_time_file.readlines()
 
 
 def get_last_day_of_current_month():
@@ -75,17 +78,18 @@ def save_dict_in_result(date_activity_dict):
         work_sheet.append(row_of_table)
 
     work_sheet[f"D{work_sheet.max_row + 1}"] = f"=SUM(D1:D{work_sheet.max_row})"
-    work_book.save("result.xlsx")
+    work_book.save("data_result/result.xlsx")
 
 
 def create_work_report_xlsx():
-    list_of_lines = copy_time_report_txt_to_list("work-report.txt")
+    list_of_lines = copy_time_report_txt_to_list("data_source/work-report.txt")
     dict_of_line = updated_list_to_dict(list_of_lines)
     save_dict_in_result(dict_of_line)
+    colour_and_styles()
 
 
 def get_amount_of_working_hours():
-    work_book = load_workbook("result.xlsx")
+    work_book = load_workbook("data_result/result.xlsx")
     work_sheet = work_book.active
 
     hours_sum = 0
@@ -95,6 +99,17 @@ def get_amount_of_working_hours():
 
     print(hours_sum)
     return hours_sum
+
+
+def colour_and_styles():
+    work_book = load_workbook("data_result/result.xlsx")
+    work_sheet = work_book.active
+    for line in range(2, work_sheet.max_row):
+        if work_sheet[f"D{line}"].value == 0:
+            for column in range(1, 7):
+                work_sheet[f"{get_column_letter(column)}{line}"].fill = PatternFill(fgColor="699949", fill_type="solid")
+
+    work_book.save("data_result/result.xlsx")
 
 
 if __name__ == "__main__":
