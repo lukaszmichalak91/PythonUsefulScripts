@@ -6,5 +6,11 @@ class SalaryCalc:
         self.tax = tax
         self.tax_factor = tax / 100
         self.salary_net = working_hours * pay_for_hour
-        self.salary_gross = f"{round(self.salary_net * (self.tax_factor + 1), 2):.2f}"
-        self.tax_amount = f"{round(self.salary_net * self.tax_factor, 2):.2f}"
+        self.salary_gross = f"{self.salary_net * (self.tax_factor + 1):.2f}"
+        self.tax_amount = f"{self.salary_net * self.tax_factor:.2f}"
+
+
+if __name__ == "__main__":
+    test_salary = SalaryCalc(168, 135, 23)
+    print(test_salary.salary_gross)
+    print(test_salary.tax_amount)

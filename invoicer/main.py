@@ -1,7 +1,7 @@
 import salary_calc
+from create_invoice import fill_invoice
 from salary_as_words import get_salary_words
 from work_time_read_write import create_work_report_xlsx, get_amount_of_working_hours
-from create_invoice import fill_invoice
 
 create_work_report_xlsx()
 working_hours = get_amount_of_working_hours()
@@ -13,6 +13,7 @@ print(f"My salary is {my_salary.salary_net} net plus {my_salary.tax} tax, so it 
 print(f"Tax only is {my_salary.tax_amount}")
 
 salary_words = get_salary_words(my_salary.salary_gross)
+print(salary_words)
 
 fill_invoice(my_salary.salary_net,
              my_salary.salary_net,
@@ -20,4 +21,3 @@ fill_invoice(my_salary.salary_net,
              my_salary.tax,
              my_salary.tax_amount,
              salary_words)
-

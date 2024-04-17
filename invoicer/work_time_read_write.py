@@ -1,3 +1,4 @@
+import logging
 from datetime import date, datetime, timedelta
 
 from openpyxl import Workbook, load_workbook
@@ -6,8 +7,11 @@ from openpyxl.utils import get_column_letter
 
 
 def copy_time_report_txt_to_list(source_path):
-    with open(source_path, 'r') as work_time_file:
-        return work_time_file.readlines()
+    try:
+        with open(source_path, 'r') as work_time_file:
+            return work_time_file.readlines()
+    except FileNotFoundError as e:
+        logging.exception(e)
 
 
 def get_last_day_of_current_month():
@@ -70,11 +74,11 @@ def save_dict_in_result(date_activity_dict):
 
     work_sheet.append(table_headings)
 
-    for date_key in date_activity_dict:
-        if not date_activity_dict[date_key]:
-            row_of_table = [f"{date_key}", "John Doe", "TestClient", 0, 0, date_activity_dict[date_key]]
+    for date_key, activity_value in date_activity_dict.items():
+        if not activity_value:
+            row_of_table = [f"{date_key}", "John Doe", "TestClient", 0, 0, activity_value]
         else:
-            row_of_table = [f"{date_key}", "John Doe", "TestClient", 8, 0, date_activity_dict[date_key]]
+            row_of_table = [f"{date_key}", "John Doe", "TestClient", 8, 0, activity_value]
         work_sheet.append(row_of_table)
 
     work_sheet[f"D{work_sheet.max_row + 1}"] = f"=SUM(D1:D{work_sheet.max_row})"
@@ -89,27 +93,31 @@ def create_work_report_xlsx():
 
 
 def get_amount_of_working_hours():
-    work_book = load_workbook("data_result/result.xlsx")
-    work_sheet = work_book.active
+    try:
+        work_book = load_workbook("data_result/result.xlsx")
+        work_sheet = work_book.active
 
-    hours_sum = 0
+        hours_list = [work_sheet[f"D{line}"].value for line in range(2, work_sheet.max_row)]
+        hours_sum = sum(hours_list)
 
-    for line in range(2, work_sheet.max_row):
-        hours_sum += work_sheet[f"D{line}"].value
-
-    print(hours_sum)
-    return hours_sum
+        print(hours_sum)
+        return hours_sum
+    except FileNotFoundError as e:
+        logging.exception(e)
 
 
 def colour_and_styles():
-    work_book = load_workbook("data_result/result.xlsx")
-    work_sheet = work_book.active
-    for line in range(2, work_sheet.max_row):
-        if work_sheet[f"D{line}"].value == 0:
-            for column in range(1, 7):
-                work_sheet[f"{get_column_letter(column)}{line}"].fill = PatternFill(fgColor="699949", fill_type="solid")
-
-    work_book.save("data_result/result.xlsx")
+    try:
+        work_book = load_workbook("data_result/result.xlsx")
+        work_sheet = work_book.active
+        for line in range(2, work_sheet.max_row):
+            if work_sheet[f"D{line}"].value == 0:
+                for column in range(1, 7):
+                    work_sheet[f"{get_column_letter(column)}{line}"].fill = PatternFill(fgColor="699949",
+                                                                                        fill_type="solid")
+        work_book.save("data_result/result.xlsx")
+    except FileNotFoundError as e:
+        logging.exception(e)
 
 
 if __name__ == "__main__":
