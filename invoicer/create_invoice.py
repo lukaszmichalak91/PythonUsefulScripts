@@ -6,9 +6,9 @@ from docx.api import Document
 from docx.opc.exceptions import PackageNotFoundError
 from docx2pdf import convert
 
-CONTRACTOR_DATA = "JD Ltd. John Doe\nNIP:1234567890\nKonto: T Bank\n11 0000 0000 0000 0000 0000 0000"
+CONTRACTOR_DATA = "Jdt John Doe\nNIP:0123456789\nKonto: Test bank\n31 0000 0000 1111 0000 0000 0000"
 CONTRACTOR_NAME = "John Doe"
-CLIENT_DATA = "Long name of client company\nTest Street 10/1 floor, 00-000 TestCity\nNIP: 987-654-32-10"
+CLIENT_DATA = "Very long name for contractor company\ntest street 15/4 floor, 00-1111 Test City\nNIP: 111-000-00-00"
 
 
 def fill_invoice(price_net, value_net, value_gross, tax, tax_value, salary_in_words):
@@ -34,7 +34,7 @@ def fill_invoice(price_net, value_net, value_gross, tax, tax_value, salary_in_wo
                                 run.text = run.text.replace(key, str(value))
 
         document.save(f"data_result/{get_invoice_title()}")
-        convert(f"data_result/{get_invoice_title()}.docx")
+        convert(f"data_result/{get_invoice_title()}")
 
     except PackageNotFoundError as e:
         logging.exception(e)
@@ -81,4 +81,4 @@ def get_day_of_payment():
 
 def get_invoice_title():
     invoice_title_date = datetime.today().date().strftime("%m.%y")
-    return f"{CONTRACTOR_NAME} -  Faktura Vat {invoice_title_date}"
+    return f"{CONTRACTOR_NAME} -  Faktura Vat {invoice_title_date}.docx"

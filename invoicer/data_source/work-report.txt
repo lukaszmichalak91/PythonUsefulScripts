@@ -1,21 +1,21 @@
-02.04:tests
-03.04:pi planning day1
-04.04:pi planning day2
-05.04:tests
-08.04:after weekend
-09.04:after Weekend 2
-10.04:test
-11.04:long ago
-12.04:Final test!!!
-15.04:test1
-16.04:testing
-17.04:test
-18.04:testtest2
-19.04:tests
-22.04:tests
-23.04:tests
-24.04:tests
-25.04:tests
-26.04:tests
-29.04:test2
-30.04:tests
+02.04:test automation for admin part
+03.04:pi planning day 1
+04.04:pi planning day 2
+05.04:creating pipeline for regression tests
+08.04:test automations for panels refactor
+09.04:tests for admin acquirer and messages
+10.04:refactor for waits
+11.04:test automation refactor for waits and unused methods
+12.04:retest of bug for incorrect transaction failed message
+15.04:tests refactor
+16.04:prod deploy sanity tests, tests automation
+17.04:automations for portal tests
+18.04:refactor of automated tests
+19.04:tests smell code fixes, updating repo
+22.04:refactor tests for class methods
+23.04:test automation for transaction details
+24.04:transaction advance filters automated tests, pipeline clarification meeting
+25.04:reseeding db meeting, automation tests
+26.04:investigation for pipeline bugs, automation tests
+29.04:terminal tests refactor
+30.04:admin tests refactor
