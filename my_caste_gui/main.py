@@ -4,6 +4,27 @@ root = tkinter.Tk()
 root.title("my Castle")
 root.geometry("600x500")
 
+parent_frame = tkinter.Frame(root)
+parent_frame.pack()
+
+menu_frame = tkinter.Frame(parent_frame)
+leather_frame = tkinter.Frame(parent_frame)
+
+for frame in (menu_frame, leather_frame):
+    frame.grid(row=0, column=0, sticky="news")
+
+# Main menu
+menu_frame.tkraise()
+
+welcome_label = tkinter.Label(menu_frame, text="Welcome to myCastle App")
+go_leather_button = tkinter.Button(menu_frame, text="Leather Assistance", command=lambda: leather_frame.tkraise())
+
+welcome_label.pack()
+go_leather_button.pack()
+
+
+# Calculator inch -> millimeter(child of leather_frame)
+
 
 def convert():
     if in_unit_label.grid_info().get("column") == 2:
@@ -37,10 +58,7 @@ def switch_sides():
         cm_entry.grid(row=1, column=0)
 
 
-frame = tkinter.Frame()
-frame.pack()
-
-calc_frame = tkinter.LabelFrame(frame, text="Dimension Converter in/mm", pady=20)
+calc_frame = tkinter.LabelFrame(leather_frame, text="Dimension Converter in/mm", pady=20)
 calc_frame.grid(row=0, column=0, columnspan=2, sticky="news")
 
 incorrect_value_error_label = tkinter.Label(calc_frame)
@@ -60,46 +78,29 @@ equal_label.grid(row=1, column=1)
 calc_button.grid(row=2, column=1, pady=10)
 switch_sides_button.grid(row=1, column=1)
 
-popular_inch_frame = tkinter.LabelFrame(frame, text="Popular inch to mm")
-popular_inch_frame.grid(row=1, column=0, pady=20, sticky="news")
+# Frames for popular inch and oz to mm for leather(children of 'leather_frame')
 
-one_eighth_inch_label = tkinter.Label(popular_inch_frame, text="1/8 in = 3,18 mm")
-one_fourth_inch_label = tkinter.Label(popular_inch_frame, text="1/4 in = 6,35 mm")
-half_inch_label = tkinter.Label(popular_inch_frame, text="1/2 in = 12,70 mm")
-one_inch_label = tkinter.Label(popular_inch_frame, text="1 in = 25,40 mm")
-two_inches_label = tkinter.Label(popular_inch_frame, text="2 in = 50,80 mm")
-three_inches_label = tkinter.Label(popular_inch_frame, text="3 in = 76,20 mm")
+popular_inch_frame = tkinter.LabelFrame(leather_frame, text="Popular inch to mm")
+popular_inch_frame.grid(row=1, column=0, sticky="w")
 
-one_eighth_inch_label.grid(row=0, column=3, sticky="w")
-one_fourth_inch_label.grid(row=1, column=3, sticky="w")
-half_inch_label.grid(row=2, column=3, sticky="w")
-one_inch_label.grid(row=3, column=3, sticky="w")
-two_inches_label.grid(row=4, column=3, sticky="w")
-three_inches_label.grid(row=5, column=3, sticky="w")
+popular_inch_tuple = ("1/8 in = 3,18 mm", "1/4 in = 6,35 mm", "1/2 in = 12,70 mm",
+                      "1 in = 25,40 mm", "2 in = 50,80 mm", "3 in = 76,20 mm")
 
-thickness_frame = tkinter.LabelFrame(frame, text="Thickness of leather oz to mm")
-thickness_frame.grid(row=1, column=1, pady=20)
+for inch_label_index in range(0, len(popular_inch_tuple)):
+    inch_label = tkinter.Label(popular_inch_frame, text=popular_inch_tuple[inch_label_index])
+    inch_label.grid(row=inch_label_index, column=3, padx=30)
 
-one_oz_label = tkinter.Label(thickness_frame, text="1 oz = 0.4 mm")
-two_oz_label = tkinter.Label(thickness_frame, text="2 oz = 0.8 mm")
-three_oz_label = tkinter.Label(thickness_frame, text="3 oz = 1.2 mm")
-four_oz_label = tkinter.Label(thickness_frame, text="4 oz = 1.6 mm")
-five_oz_label = tkinter.Label(thickness_frame, text="5 oz = 2.0 mm")
-six_oz_label = tkinter.Label(thickness_frame, text="6 oz = 2.4 mm")
-seven_oz_label = tkinter.Label(thickness_frame, text="7 oz = 2.8 mm")
-eight_oz_label = tkinter.Label(thickness_frame, text="8 oz = 3.2 mm")
-nine_oz_label = tkinter.Label(thickness_frame, text="9 oz = 3.6 mm")
-ten_oz_label = tkinter.Label(thickness_frame, text="10 oz = 4.0 mm")
+thickness_frame = tkinter.LabelFrame(leather_frame, text="Thickness of leather oz to mm")
+thickness_frame.grid(row=1, column=1)
 
-one_oz_label.grid(row=0, column=3)
-two_oz_label.grid(row=1, column=3)
-three_oz_label.grid(row=2, column=3)
-four_oz_label.grid(row=3, column=3)
-five_oz_label.grid(row=4, column=3)
-six_oz_label.grid(row=5, column=3)
-seven_oz_label.grid(row=6, column=3)
-eight_oz_label.grid(row=7, column=3)
-nine_oz_label.grid(row=8, column=3)
-ten_oz_label.grid(row=9, column=3)
+oz_label_tuple = ("1 oz = 0.4 mm", "2 oz = 0.8 mm", "3 oz = 1.2 mm", "4 oz = 1.6 mm", "5 oz = 2.0 mm", "6 oz = 2.4 mm",
+                  "7 oz = 2.8 mm", "8 oz = 3.2 mm", "9 oz = 3.6 mm", "10 oz = 4.0 mm")
+
+for oz_label_index in range(0, len(oz_label_tuple)):
+    oz_label = tkinter.Label(thickness_frame, text=oz_label_tuple[oz_label_index])
+    oz_label.grid(row=oz_label_index, column=3, padx=30)
+
+home_button = tkinter.Button(leather_frame, text="<-- Go home", command=lambda: menu_frame.tkraise())
+home_button.grid(row=2, column=0, sticky="news", pady=30)
 
 root.mainloop()
