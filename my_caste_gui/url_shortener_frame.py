@@ -1,4 +1,5 @@
 import tkinter
+import pyperclip
 
 import pyshorteners
 
@@ -17,6 +18,8 @@ class UrlShortenerFrame(tkinter.Frame):
         self.short_url_entry = tkinter.Entry(self)
 
         shorten_url_button = tkinter.Button(self, text="Shorten!", command=lambda: self.shorten_url())
+        copy_to_clipboard_button = tkinter.Button(self, text="Copy to clipboard",
+                                                  command=lambda: pyperclip.copy(self.short_url_entry.get()))
         go_back_button = tkinter.Button(self, text="<-- Go home", command=lambda: parent.menu_frame.tkraise())
 
         self.incorrect_url_label = tkinter.Label(self, text="Please provide correct URL")
@@ -28,16 +31,19 @@ class UrlShortenerFrame(tkinter.Frame):
         self.short_url_entry.grid(row=1, column=2)
 
         shorten_url_button.grid(row=1, column=1)
+        copy_to_clipboard_button.grid(row=2, column=2)
         go_back_button.grid(row=2, column=1, pady=15)
         self.grid(row=0, column=0, sticky="news")
 
     def shorten_url(self):
-        shortener = pyshorteners.Shortener()
         try:
+            self.short_url_entry.delete(0, "end")
+            shortener = pyshorteners.Shortener()
             short_url = shortener.tinyurl.short(self.long_url_entry.get())
             self.short_url_entry.insert(0, short_url)
             self.incorrect_url_label.grid_remove()
         except Exception as e:
+            print(type(e))
             if type(e).__name__ == "BadURLException" or type(e).__name__ == "ShorteningErrorException":
                 self.incorrect_url_label.grid(row=2, column=0)
             if type(e).__name__ == "ReadTimeout":
