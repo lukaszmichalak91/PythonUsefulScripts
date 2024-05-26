@@ -1,11 +1,7 @@
 import tkinter
+
 import pyperclip
-
 import pyshorteners
-
-
-# idea for later - create "copy to clipboard button"
-# refactor from pack to grid
 
 class UrlShortenerFrame(tkinter.Frame):
     def __init__(self, parent):

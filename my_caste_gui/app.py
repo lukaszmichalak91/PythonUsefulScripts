@@ -2,8 +2,8 @@ import tkinter
 
 import leather_frame
 import menu_frame
-import url_shortener_frame
 import merger_frame
+import url_shortener_frame
 
 
 class App(tkinter.Tk):
