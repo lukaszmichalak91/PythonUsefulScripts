@@ -1,21 +1,20 @@
-02.04:test automation for admin part
-03.04:pi planning day 1
-04.04:pi planning day 2
-05.04:creating pipeline for regression tests
-08.04:test automations for panels refactor
-09.04:tests for admin acquirer and messages
-10.04:refactor for waits
-11.04:test automation refactor for waits and unused methods
-12.04:retest of bug for incorrect transaction failed message
-15.04:tests refactor
-16.04:prod deploy sanity tests, tests automation
-17.04:automations for portal tests
-18.04:refactor of automated tests
-19.04:tests smell code fixes, updating repo
-22.04:refactor tests for class methods
-23.04:test automation for transaction details
-24.04:transaction advance filters automated tests, pipeline clarification meeting
-25.04:reseeding db meeting, automation tests
-26.04:investigation for pipeline bugs, automation tests
-29.04:terminal tests refactor
-30.04:admin tests refactor
+02.05:autotest1
+06.05:autotest2
+07.05:autotest3
+08.05:autotest4
+09.05:autotest5
+10.05:autotest6
+13.05:autotest7
+14.05:autotest8
+15.05:autotest9
+16.05:autotest10
+17.05:autotest11
+20.05:autotest12
+21.05:autotest13
+22.05:autotest14
+23.05:autotest15
+24.05:autotest16
+27.05:autotest17
+28.05:autotest18
+29.05:autotest19
+31.05:autotest20

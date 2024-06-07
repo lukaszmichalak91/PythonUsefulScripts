@@ -1,5 +1,7 @@
 import tkinter
+from tkinter import font
 
+import invoicer_frame
 import leather_frame
 import menu_frame
 import merger_frame
@@ -22,9 +24,11 @@ class MainFrame(tkinter.Frame):
         self.leather_frame = leather_frame.LeatherFrame(self)
         self.url_shortener_frame = url_shortener_frame.UrlShortenerFrame(self)
         self.merger_frame = merger_frame.MergerFrame(self)
+        self.invoicer_frame = invoicer_frame.InvoicerFrame(self)
 
         self.menu_frame.tkraise()
         self.pack()
+        print(font.nametofont('TkTextFont').actual())
 
 
 App()
