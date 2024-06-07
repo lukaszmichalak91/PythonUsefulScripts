@@ -26,4 +26,4 @@ def is_holiday_or_weekend(date):
 
 
 if __name__ == "__main__":
-    print(count_working_hour_per_month(12, 2024))
+    print(count_working_hour_per_month(5, 2024))
