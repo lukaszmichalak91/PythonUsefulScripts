@@ -65,7 +65,7 @@ def updated_list_to_dict(lines_list):
     return lines_dict
 
 
-def save_dict_in_result(date_activity_dict):
+def save_dict_in_result(date_activity_dict, save_path):
     work_book = Workbook()
     work_sheet = work_book.active
     work_sheet.title = "WorkTimeReport"
@@ -82,19 +82,25 @@ def save_dict_in_result(date_activity_dict):
         work_sheet.append(row_of_table)
 
     work_sheet[f"D{work_sheet.max_row + 1}"] = f"=SUM(D1:D{work_sheet.max_row})"
-    work_book.save("data_result/result.xlsx")
+
+    for line in range(2, work_sheet.max_row):
+        if work_sheet[f"D{line}"].value == 0:
+            for column in range(1, 7):
+                work_sheet[f"{get_column_letter(column)}{line}"].fill = PatternFill(fgColor="699949",
+                                                                                    fill_type="solid")
+
+    work_book.save(f"{save_path}.xlsx")
 
 
-def create_work_report_xlsx():
-    list_of_lines = copy_time_report_txt_to_list("data_source/work-report.txt")
+def create_work_report_from_txt(txt_path, save_location):
+    list_of_lines = copy_time_report_txt_to_list(txt_path)
     dict_of_line = updated_list_to_dict(list_of_lines)
-    save_dict_in_result(dict_of_line)
-    colour_and_styles()
+    save_dict_in_result(dict_of_line, save_location)
 
 
-def get_amount_of_working_hours():
+def get_amount_of_working_hours(save_location):
     try:
-        work_book = load_workbook("data_result/result.xlsx")
+        work_book = load_workbook(save_location)
         work_sheet = work_book.active
 
         hours_list = [work_sheet[f"D{line}"].value for line in range(2, work_sheet.max_row)]
@@ -104,22 +110,3 @@ def get_amount_of_working_hours():
         return hours_sum
     except FileNotFoundError as e:
         logging.exception(e)
-
-
-def colour_and_styles():
-    try:
-        work_book = load_workbook("data_result/result.xlsx")
-        work_sheet = work_book.active
-        for line in range(2, work_sheet.max_row):
-            if work_sheet[f"D{line}"].value == 0:
-                for column in range(1, 7):
-                    work_sheet[f"{get_column_letter(column)}{line}"].fill = PatternFill(fgColor="699949",
-                                                                                        fill_type="solid")
-        work_book.save("data_result/result.xlsx")
-    except FileNotFoundError as e:
-        logging.exception(e)
-
-
-if __name__ == "__main__":
-    create_work_report_xlsx()
-    get_amount_of_working_hours()

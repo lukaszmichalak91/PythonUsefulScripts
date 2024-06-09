@@ -1,9 +1,8 @@
 import salary_calc
 from create_invoice import fill_invoice
 from salary_as_words import get_salary_words
-from work_time_read_write import create_work_report_xlsx, get_amount_of_working_hours
+from work_time_read_write import get_amount_of_working_hours
 
-create_work_report_xlsx()
 working_hours = get_amount_of_working_hours()
 
 my_salary = salary_calc.SalaryCalc(working_hours, 135, 23)

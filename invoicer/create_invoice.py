@@ -11,9 +11,9 @@ CONTRACTOR_NAME = "John Doe"
 CLIENT_DATA = "Very long name for contractor company\ntest street 15/4 floor, 00-1111 Test City\nNIP: 111-000-00-00"
 
 
-def fill_invoice(price_net, value_net, value_gross, tax, tax_value, salary_in_words):
+def fill_invoice(price_net, value_net, value_gross, tax, tax_value, salary_in_words, save_invoice_path):
     try:
-        document = Document("data_source/inv-template.docx")
+        document = Document("../invoicer/data_source/inv-template.docx")
 
         text_data_dict = inv_text_data(value_gross, salary_in_words)
         table_data_dict = inv_table_data(price_net, value_net, tax, tax_value, value_gross)
@@ -33,8 +33,8 @@ def fill_invoice(price_net, value_net, value_gross, tax, tax_value, salary_in_wo
                             for run in cell.paragraphs[0].runs:
                                 run.text = run.text.replace(key, str(value))
 
-        document.save(f"data_result/{get_invoice_title()}")
-        convert(f"data_result/{get_invoice_title()}")
+        document.save(f"{save_invoice_path}.docx")
+        convert(f"{save_invoice_path}.docx")
 
     except PackageNotFoundError as e:
         logging.exception(e)
@@ -81,4 +81,4 @@ def get_day_of_payment():
 
 def get_invoice_title():
     invoice_title_date = datetime.today().date().strftime("%m.%y")
-    return f"{CONTRACTOR_NAME} -  Faktura Vat {invoice_title_date}.docx"
+    return f"{CONTRACTOR_NAME} -  Faktura Vat {invoice_title_date}"
